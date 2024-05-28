@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LInerGradient</title>
+    <style>
+      body {
+        height: 100vh;
+        background-image: linear-gradient(
+          to right top,
+          #051937,
+          #004d7a,
+          #a8eb12
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      section {
+        align-items: center;
+        gap: 3.2rem;
+        text-align: center;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn button {
+        box-shadow: 10px 10px 14px 1px rgba(00, 00, 00, 0.2);
+        padding: 10px;
+        border: none;
+        border-radius: 25px;
+        margin: 0 1.5rem;
+        cursor: pointer;
+      }
+
+      #myButton1 {
+        background-color: rgb(151, 151, 149);
+      }
+      #myButton2 {
+        background-color: rgb(168, 235, 18);
+      }
+      h3 {
+        color: #fff;
+      }
+      .copycode {
+        color: #fff;
+        border-left: 2px solid #8c8c8c;
+        background-color: #00000024;
+        padding:5px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <section>
+      <div class="btn">
+        <button id="myButton1">#051937</button>
+        <button id="myButton2">#008793</button>
+      </div>
+      <h3>Click the color to copy</h3>
+      <div class="copycode">
+        background-image: linear-gradient(to right, rgb(92, 145, 229), rgb(152,
+        45, 129))
+      </div>
+    </section>
+
+    <script>
+      let btn1 = document.getElementById("myButton1");
+      let btn2 = document.getElementById("myButton2");
+      let copyDiv = document.querySelector(".copycode");
+
+      const getHexCode = () => {
+        let myHex = "0123456789abcdef";
+        let randomValue = "";
+        for (let index = 0; index < 6; index++) {
+          let randomIndex = Math.floor(Math.random() * myHex.length);
+          randomValue += myHex[randomIndex];
+        }
+        randomValue = "#".concat(randomValue);
+        return randomValue;
+      };
+
+      const handleButton1 = () => {
+        let rgb1 = getHexCode();
+        console.log(rgb1);
+        btn1.innerText = rgb1;
+        document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, #444)`;
+
+        copyDiv.innerHTML = `background-image: linear-gradient(to right, ${rgb1}, rgb(152, 45, 129))`;
+      };
+      const handleButton2 = () => {
+        let rgb2 = getHexCode();
+        console.log(rgb2);
+        btn2.innerText = rgb2;
+        document.body.style.backgroundImage = `linear-gradient(to right, #000, ${rgb2})`;
+
+        copyDiv.innerHTML = `background-image: linear-gradient(to right, rgb(92, 145, 229), ${rgb2})`;
+      };
+
+      btn1.addEventListener("click", handleButton1);
+      btn2.addEventListener("click", handleButton2);
+
+      copyDiv.addEventListener("click", () => {
+        alert(`copied linear-gradient: ${copyDiv.innerText}`)
+        navigator.clipboard.writeText(copyDiv.innerText);
+      });
+    </script>
+  </body>
+</html>
